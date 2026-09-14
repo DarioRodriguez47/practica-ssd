@@ -1,0 +1,12 @@
+{
+  "name": "saludo-cli",
+  "version": "1.0.0",
+  "description": "CLI que saluda a una persona por su nombre, con soporte para un mensaje de saludo personalizado.",
+  "bin": {
+    "saludo": "./bin/saludo.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "ISC"
+}
