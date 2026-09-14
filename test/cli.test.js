@@ -59,3 +59,21 @@ test('CLI: empty custom greeting phrase', () => {
   assert.notEqual(result.status, 0);
   assert.equal(result.stdout, '');
 });
+
+test('CLI: --mayusculas uppercases the default greeting', () => {
+  const result = runCli(['Juan', '--mayusculas']);
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout.trim(), 'HOLA, JUAN!');
+});
+
+test('CLI: --mayusculas uppercases a custom --mensaje phrase', () => {
+  const result = runCli(['Juan', '--mensaje', 'Buenos días', '--mayusculas']);
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout.trim(), 'BUENOS DÍAS, JUAN!');
+});
+
+test('CLI: casing is unaffected when --mayusculas is absent', () => {
+  const result = runCli(['Juan']);
+  assert.equal(result.status, 0);
+  assert.equal(result.stdout.trim(), 'Hola, Juan!');
+});

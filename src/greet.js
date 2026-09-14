@@ -6,6 +6,7 @@ class UsageError extends Error {}
 
 function parseArgs(argv) {
   let message;
+  let uppercase = false;
   const positional = [];
 
   for (let i = 0; i < argv.length; i++) {
@@ -16,15 +17,17 @@ function parseArgs(argv) {
       i++;
     } else if (arg.startsWith('--mensaje=')) {
       message = arg.slice('--mensaje='.length);
+    } else if (arg === '--mayusculas') {
+      uppercase = true;
     } else {
       positional.push(arg);
     }
   }
 
-  return { name: positional[0], message };
+  return { name: positional[0], message, uppercase };
 }
 
-function formatGreeting(name, message) {
+function formatGreeting(name, message, uppercase = false) {
   const trimmedName = (name ?? '').trim();
   if (!trimmedName) {
     throw new UsageError('Falta el nombre. Uso: saludo <nombre> [--mensaje "Frase"]');
@@ -39,7 +42,8 @@ function formatGreeting(name, message) {
     phrase = trimmedMessage;
   }
 
-  return `${phrase}, ${trimmedName}!`;
+  const greeting = `${phrase}, ${trimmedName}!`;
+  return uppercase ? greeting.toLocaleUpperCase('es') : greeting;
 }
 
 module.exports = { DEFAULT_GREETING, UsageError, parseArgs, formatGreeting };

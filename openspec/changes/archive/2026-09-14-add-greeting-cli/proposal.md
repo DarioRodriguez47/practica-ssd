@@ -1,23 +1,23 @@
 ## Why
 
-No CLI exists yet in this project. We need a simple command-line entry point that greets a person by name, with the ability to customize the greeting phrase (e.g. "Hola" vs "Buenos días") instead of being locked to a single hardcoded message.
+Todavía no existe ningún CLI en este proyecto. Necesitamos un punto de entrada de línea de comandos simple que salude a una persona por su nombre, con la posibilidad de personalizar la frase de saludo (ej. "Hola" vs "Buenos días") en lugar de quedar fijo a un único mensaje hardcodeado.
 
 ## What Changes
 
-- Add a new Node.js CLI command (`saludo`) that accepts a required name argument and prints a greeting.
-- Add a `--mensaje` / `-m` flag to override the default greeting phrase for a single invocation.
-- Define a default greeting phrase used when `--mensaje` is not provided.
-- Validate input: reject a missing/empty name with a clear usage error and a non-zero exit code.
+- Agregar un nuevo comando CLI de Node.js (`saludo`) que acepte un argumento de nombre obligatorio e imprima un saludo.
+- Agregar un flag `--mensaje` / `-m` para sobrescribir la frase de saludo por defecto en una invocación puntual.
+- Definir una frase de saludo por defecto que se use cuando no se provee `--mensaje`.
+- Validar la entrada: rechazar un nombre faltante/vacío con un error de uso claro y un código de salida distinto de cero.
 
 ## Capabilities
 
 ### New Capabilities
-- `greeting-cli`: CLI command that takes a name and an optional custom greeting phrase and prints a formatted greeting message to stdout.
+- `greeting-cli`: comando CLI que recibe un nombre y opcionalmente una frase de saludo personalizada, e imprime un mensaje de saludo formateado en stdout.
 
 ### Modified Capabilities
-(none — greenfield project, no existing specs)
+(ninguna — proyecto greenfield, sin specs existentes)
 
 ## Impact
 
-- New Node.js package/executable (e.g. `bin/saludo.js` or equivalent) plus its `package.json` entry point.
-- No existing code, APIs, or systems affected — this is the first capability added to the project.
+- Nuevo paquete/ejecutable de Node.js (ej. `bin/saludo.js` o equivalente) junto con su punto de entrada en `package.json`.
+- No afecta código, APIs ni sistemas existentes — es la primera capability agregada al proyecto.

@@ -9,6 +9,14 @@ schema: spec-driven
 #     We use conventional commits
 #     Domain: e-commerce platform
 
+context: |
+  Idioma: Español.
+  Todos los artefactos (proposal, design, tasks, y la prosa de requirements/scenarios)
+  deben escribirse en español. Los encabezados estructurales (## Purpose, ## ADDED
+  Requirements, #### Scenario, WHEN/THEN) y las keywords normativas (SHALL, MUST,
+  SHOULD, MAY) se mantienen en inglés porque la validación de OpenSpec depende de ellos.
+  Tech stack: Node.js (CLI tools, sin dependencias externas salvo justificación).
+
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
 # Example:

@@ -5,13 +5,14 @@ const assert = require('node:assert/strict');
 const { formatGreeting, parseArgs, UsageError, DEFAULT_GREETING } = require('../src/greet');
 
 test('parseArgs reads the positional name', () => {
-  assert.deepEqual(parseArgs(['Juan']), { name: 'Juan', message: undefined });
+  assert.deepEqual(parseArgs(['Juan']), { name: 'Juan', message: undefined, uppercase: false });
 });
 
 test('parseArgs reads --mensaje with a separate value', () => {
   assert.deepEqual(parseArgs(['Juan', '--mensaje', 'Buenos días']), {
     name: 'Juan',
     message: 'Buenos días',
+    uppercase: false,
   });
 });
 
@@ -19,6 +20,7 @@ test('parseArgs reads --mensaje=value form', () => {
   assert.deepEqual(parseArgs(['Juan', '--mensaje=Buenos días']), {
     name: 'Juan',
     message: 'Buenos días',
+    uppercase: false,
   });
 });
 
@@ -26,6 +28,15 @@ test('parseArgs reads -m shorthand', () => {
   assert.deepEqual(parseArgs(['Juan', '-m', 'Buenas noches']), {
     name: 'Juan',
     message: 'Buenas noches',
+    uppercase: false,
+  });
+});
+
+test('parseArgs reads --mayusculas without interfering with name/message parsing', () => {
+  assert.deepEqual(parseArgs(['Juan', '--mensaje', 'Buenos días', '--mayusculas']), {
+    name: 'Juan',
+    message: 'Buenos días',
+    uppercase: true,
   });
 });
 
@@ -55,4 +66,16 @@ test('formatGreeting rejects an empty/whitespace-only name', () => {
 
 test('formatGreeting rejects an empty/whitespace-only custom message', () => {
   assert.throws(() => formatGreeting('Juan', '   '), UsageError);
+});
+
+test('formatGreeting uppercases the default greeting when --mayusculas is set', () => {
+  assert.equal(formatGreeting('Juan', undefined, true), 'HOLA, JUAN!');
+});
+
+test('formatGreeting uppercases a custom phrase and preserves accents', () => {
+  assert.equal(formatGreeting('Juan', 'Buenos días', true), 'BUENOS DÍAS, JUAN!');
+});
+
+test('formatGreeting leaves casing unchanged when --mayusculas is absent', () => {
+  assert.equal(formatGreeting('Juan', undefined, false), 'Hola, Juan!');
 });
